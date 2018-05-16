@@ -52,9 +52,7 @@ namespace NHibernetDemo.Services
 
                 using (var tx = session.BeginTransaction())
                 {
-                    var students = session.CreateCriteria<Student>().List<Student>();
-
-                    result.AddRange(students);
+                    result = session.CreateCriteria<Student>().List<Student>() as List<Student>;
 
                     tx.Commit();
                 }

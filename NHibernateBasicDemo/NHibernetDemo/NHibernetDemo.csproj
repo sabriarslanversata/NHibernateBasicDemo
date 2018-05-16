@@ -72,5 +72,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Student.hbm.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="StudentTable.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -32,7 +32,7 @@ namespace NHibernetDemo
             //Update Student (id: 1)
             var studentToUpdate = new Student
             {
-                ID = 2,
+                ID = 1,
                 FirstName = "Test 1",
                 LastName = "Test 2"
             };
