@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernetDemo", "NHibernetDemo\NHibernetDemo.csproj", "{C33A42D1-3DA2-4FD7-8409-80D059FA7368}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoData", "DemoData\DemoData.csproj", "{8E9FCC09-686B-405E-A8A1-A3BB94B00600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C33A42D1-3DA2-4FD7-8409-80D059FA7368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33A42D1-3DA2-4FD7-8409-80D059FA7368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33A42D1-3DA2-4FD7-8409-80D059FA7368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E9FCC09-686B-405E-A8A1-A3BB94B00600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E9FCC09-686B-405E-A8A1-A3BB94B00600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E9FCC09-686B-405E-A8A1-A3BB94B00600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E9FCC09-686B-405E-A8A1-A3BB94B00600}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

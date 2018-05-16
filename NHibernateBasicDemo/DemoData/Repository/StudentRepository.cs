@@ -1,20 +1,37 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using NHibernate.Cfg;
-using NHibernate.Dialect;
-using NHibernate.Driver;
-using NHibernetDemo.Models;
+﻿
 
-namespace NHibernetDemo.Services
+namespace DemoData.Repository
 {
-    /// <summary>
-    /// A class that represents the implementation of CRUD operations on Student table.
-    /// </summary>
-    public class StudentService
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using DemoData.Model;
+    using FluentNHibernate.Cfg;
+    using NHibernate;
+    using NHibernate.Cfg;
+    using NHibernate.Dialect;
+    using NHibernate.Driver;
+
+
+    public class StudentRepository : IStudentRepository
     {
         private readonly Configuration _configuration;
 
-        public StudentService(string connectionString)
+        public ISessionFactory SessionFactory { get; }
+
+        private static ISessionFactory CreateSessionFactory(Configuration configuration)
+        {
+            return Fluently
+                     .Configure(configuration)
+                     .Mappings(m => m.FluentMappings.AddFromAssemblyOf<StudentRepository>())
+                     .BuildSessionFactory();
+        }
+
+        public StudentRepository(string connectionString)
         {
             _configuration = new Configuration();
             _configuration.DataBaseIntegration(x =>
@@ -24,13 +41,14 @@ namespace NHibernetDemo.Services
                 x.Dialect<MsSql2012Dialect>();
             });
 
-            _configuration.AddAssembly(Assembly.GetExecutingAssembly());
+            //_configuration.AddAssembly(Assembly.GetExecutingAssembly());
+            SessionFactory = CreateSessionFactory(_configuration);
+
         }
 
         public Student CreateSutdent(Student student)
         {
-            var sefact = _configuration.BuildSessionFactory();
-            using (var session = sefact.OpenSession())
+            using (var session = SessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {
@@ -44,12 +62,10 @@ namespace NHibernetDemo.Services
 
         public List<Student> GetAllStudents()
         {
-            var sefact = _configuration.BuildSessionFactory();
             var result = new List<Student>();
 
-            using (var session = sefact.OpenSession())
+            using (var session = SessionFactory.OpenSession())
             {
-
                 using (var tx = session.BeginTransaction())
                 {
                     result = session.CreateCriteria<Student>().List<Student>() as List<Student>;
@@ -58,17 +74,16 @@ namespace NHibernetDemo.Services
                 }
             }
 
+
             return result;
         }
 
         public Student GetStudentById(int id)
         {
-            var sefact = _configuration.BuildSessionFactory();
             Student result;
 
-            using (var session = sefact.OpenSession())
+            using (var session = SessionFactory.OpenSession())
             {
-
                 using (var tx = session.BeginTransaction())
                 {
                     result = session.Get<Student>(id);
@@ -82,8 +97,7 @@ namespace NHibernetDemo.Services
 
         public Student UpdateStudent(Student student)
         {
-            var sefact = _configuration.BuildSessionFactory();
-            using (var session = sefact.OpenSession())
+            using (var session = SessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {
@@ -98,8 +112,7 @@ namespace NHibernetDemo.Services
 
         public void DeleteStudent(int id)
         {
-            var sefact = _configuration.BuildSessionFactory();
-            using (var session = sefact.OpenSession())
+            using (var session = SessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {

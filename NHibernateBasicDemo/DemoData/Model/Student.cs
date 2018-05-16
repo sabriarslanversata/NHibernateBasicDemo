@@ -1,4 +1,4 @@
-﻿namespace NHibernetDemo.Models
+﻿namespace DemoData.Model
 {
     public class Student
     {
@@ -8,7 +8,7 @@
 
         public override string ToString()
         {
-            return string.Format("{0} - {1} {2}", ID, FirstName, LastName);
+            return string.Format($"{ID} - {FirstName} {LastName}");
         }
     }
 }

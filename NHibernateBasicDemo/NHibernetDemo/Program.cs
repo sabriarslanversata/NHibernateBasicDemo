@@ -1,6 +1,6 @@
 ﻿using System;
-using NHibernetDemo.Models;
-using NHibernetDemo.Services;
+using DemoData.Repository;
+using DemoData.Model;
 
 namespace NHibernetDemo
 {
@@ -9,8 +9,8 @@ namespace NHibernetDemo
         static void Main(string[] args)
         {
             var connectionString =
-                "Data Source=.;Initial Catalog=NHibernateDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            var studentService = new StudentService(connectionString);
+                "Data Source=.\\SQLEXPRESS;Initial Catalog=NHibernateDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            IStudentRepository repository = new StudentRepository(connectionString);
 
             //var newStudent = studentService.CreateSutdent(new Student
             //{
@@ -33,13 +33,13 @@ namespace NHibernetDemo
             var studentToUpdate = new Student
             {
                 ID = 1,
-                FirstName = "Test 1",
+                FirstName = "Test 2",
                 LastName = "Test 2"
             };
-            studentService.UpdateStudent(studentToUpdate);
+            repository.UpdateStudent(studentToUpdate);
 
 
-            var allStudents = studentService.GetAllStudents();
+            var allStudents = repository.GetAllStudents();
             foreach (var student in allStudents)
             {
                 Console.WriteLine(student);
